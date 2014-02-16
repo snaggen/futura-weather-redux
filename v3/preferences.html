@@ -40,20 +40,15 @@
 				   return '&#'+c.charCodeAt(0)+';';
 				});
 			}
-			function htmlEncodeStr(str) {
-				return str.replace(/[\u00A0-\u2666]/g, function(c) {
-				   return '&#'+c.charCodeAt(0)+';';
-				});
-			}
 			
 			function buildLanguagePicker() {
 				var select = document.getElementById("language");
 				for(var key in translations) {
 					var option = document.createElement("option");
 					option.value = key;
-					var html = htmlEncode(translations[key].name);
+					var html = translations[key].name;
 					console.log(html);
-					option.innerHTML = htmlEncode(translations[key].name);
+					option.innerHTML = translations[key].name;
 					
 					select.appendChild(option);
 				}
@@ -87,13 +82,10 @@
 						}
 						else if(children[i].name == "languageCode") {
                             var transl = translations[children[i].value].translation;
-                            console.log("transl: " + transl);
                             params["translation"] = [];
                             for (var j = 0; j < transl.length; j++) {
                                 params["translation"].push(encodeURIComponent(encodeURIComponent(transl[j])));
-                                console.log("t: " + j + " " + encodeURIComponent(encodeURIComponent(transl[j])));
                             }
-							//params["translation"] = translations[children[i].value].translation;
 
 							params[children[i].name] = Number(children[i].value);
 						}
